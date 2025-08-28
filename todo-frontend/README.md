@@ -1,5 +1,5 @@
 
-# Todo App - Aplicativo de Gerenciamento de Tarefas
+# To-Do App - Aplicativo de Gerenciamento de Tarefas
 
 
 ## 🚀 Funcionalidades
