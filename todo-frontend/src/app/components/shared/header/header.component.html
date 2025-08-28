@@ -1,0 +1,40 @@
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <h1 class="app-title">To-Do</h1>
+      <span class="app-subtitle">Gerenciador de Tarefas</span>
+    </div>
+
+    <div class="header-right" *ngIf="currentUser$ | async as user">
+      <div class="user-menu" (click)="toggleDropdown()">
+        <div class="user-avatar">
+          {{ getInitials(user.name) }}
+        </div>
+        <div class="user-info">
+          <span class="user-name">{{ user.name }}</span>
+          <span class="user-email">{{ user.email }}</span>
+        </div>
+        <div class="dropdown-arrow" [class.open]="isDropdownOpen">
+          ▼
+        </div>
+      </div>
+
+      <div class="dropdown-menu" [class.open]="isDropdownOpen" (click)="closeDropdown()">
+        <div class="dropdown-overlay" (click)="closeDropdown()"></div>
+        <div class="dropdown-content">
+          <div class="dropdown-header">
+            <div class="dropdown-user-info">
+              <strong>{{ user.name }}</strong>
+              <small>{{ user.email }}</small>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" (click)="logout()">
+            <span class="dropdown-icon">🚪</span>
+            Sair
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

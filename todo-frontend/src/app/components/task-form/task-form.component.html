@@ -1,0 +1,29 @@
+<div class="task-form" style="margin: 10px;">
+  <h3>{{ isEditing ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
+
+  <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+    <div class="form-group">
+      <label for="title">Título *</label>
+      <input type="text" id="title" name="title" [(ngModel)]="title" required placeholder="Digite o título da tarefa"
+        #titleInput="ngModel" class="form-control">
+      <div *ngIf="titleInput.invalid && titleInput.touched" class="error">
+        Título é obrigatório
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descrição</label>
+      <textarea id="description" name="description" [(ngModel)]="description" placeholder="Descrição opcional da tarefa"
+        rows="3" class="form-control"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="taskForm.invalid" class="btn btn-primary">
+        {{ isEditing ? 'Atualizar' : 'Adicionar' }} Tarefa
+      </button>
+      <button type="button" *ngIf="isEditing" (click)="onCancel()" class="btn btn-secondary">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

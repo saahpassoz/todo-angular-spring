@@ -1,0 +1,28 @@
+<div class="dashboard-container">
+  <app-header></app-header>
+
+  <main class="dashboard-content">
+    <div class="dashboard-header">
+      <h1>Minhas Tarefas</h1>
+      <p>Gerencie suas tarefas de forma eficiente</p>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="form-section">
+        <h2>{{ editingTask ? 'Editar Tarefa' : 'Nova Tarefa' }}</h2>
+        <app-task-form [editingTask]="editingTask" (taskSubmitted)="onTaskSubmitted()"
+          (editCancelled)="onEditCancelled()">
+        </app-task-form>
+      </div>
+
+      <div class="list-section">
+        <div *ngIf="isLoading" class="loading-indicator">
+          Carregando tarefas...
+        </div>
+        <app-task-list [tasks]="(tasks$ | async) || []" (taskToggled)="onTaskToggled()"
+          (taskEdited)="onTaskEdited($event)" (taskDeleted)="onTaskDeleted()">
+        </app-task-list>
+      </div>
+    </div>
+  </main>
+</div>

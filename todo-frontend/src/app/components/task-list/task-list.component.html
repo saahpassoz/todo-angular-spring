@@ -1,0 +1,40 @@
+<div class="task-list" style="margin: 20px;">
+  <div class="task-list-header">
+    <h2>Minhas Tarefas</h2>
+    <div class="task-stats">
+      <span class="stat">
+        Total: {{ tasks.length }}
+      </span>
+      <span class="stat">
+        Pendentes: {{ pendingCount }}
+      </span>
+      <span class="stat">
+        Concluídas: {{ completedCount }}
+      </span>
+    </div>
+  </div>
+
+  <div class="filter-buttons">
+    <button class="filter-btn" [class.active]="filter === 'all'" (click)="setFilter('all')">
+      Todas
+    </button>
+    <button class="filter-btn" [class.active]="filter === 'pending'" (click)="setFilter('pending')">
+      Pendentes ({{ pendingCount }})
+    </button>
+    <button class="filter-btn" [class.active]="filter === 'completed'" (click)="setFilter('completed')">
+      Concluídas ({{ completedCount }})
+    </button>
+  </div>
+
+  <div class="tasks-container">
+    <div *ngIf="filteredTasks.length === 0" class="no-tasks">
+      <p *ngIf="filter === 'all'">Nenhuma tarefa criada ainda.</p>
+      <p *ngIf="filter === 'pending'">Nenhuma tarefa pendente.</p>
+      <p *ngIf="filter === 'completed'">Nenhuma tarefa concluída.</p>
+    </div>
+
+    <app-task-item *ngFor="let task of filteredTasks; trackBy: trackByTaskId" [task]="task"
+      (taskToggled)="onTaskToggled($event)" (taskEdited)="onTaskEdited($event)" (taskDeleted)="onTaskDeleted($event)">
+    </app-task-item>
+  </div>
+</div>
